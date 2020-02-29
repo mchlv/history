@@ -16,11 +16,15 @@ function getGeoCode(qs) {
 }
 
 export default function SearchBar({
+
   onSearchChange: changeSearch,
 }) {
+  // the use State needs to live within the component. This means that the cat button needs to live in the component.
   const [searchOrder, setSearchOrder] = useState(defaults.searchOrder);
-  const [searchValue, setSearchValue] = useState(getGeoCode(getQS()) || defaults.geocode);
 
+  const [searchValue, setSearchValue] = useState(getGeoCode(getQS()) || defaults.geocode);
+  // this is the bare bones that the useState can be.
+  // first item in this array is a variable representing the state.
   useEffect(() => {
     changeSearch(searchValue, { searchOrder });
   }, []);
@@ -38,11 +42,13 @@ export default function SearchBar({
   };
 
   return (
+
     <section id="search-bar">
       <input
         onChange={event => handleSearchChange(event.target.value)}
         placeholder={defaults.instruction}
         title={defaults.instruction}
+        placeholder="Search"
         value={searchValue}
         tabIndex="1"
       />
@@ -58,6 +64,7 @@ export default function SearchBar({
           Relevance
         </option>
       </select>
+
     </section>
   );
 }
